@@ -41,7 +41,7 @@ ext {
             okhttp3         : "3.11.0",
             retrofit        : "2.4.0",
             glide           : "4.7.1",
-            dagger2         : "2.17",
+            dagger2         : "2.16",
             rxjava2         : "2.2.0",
             rxandroid2      : "2.1.0",
             lifecycle       : "1.1.1",

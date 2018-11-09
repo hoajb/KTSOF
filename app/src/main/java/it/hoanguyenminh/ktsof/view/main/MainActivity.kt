@@ -1,9 +1,10 @@
-package it.hoanguyenminh.ktsof
+package it.hoanguyenminh.ktsof.view.main
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import dagger.android.DaggerActivity
+import it.hoanguyenminh.ktsof.R
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

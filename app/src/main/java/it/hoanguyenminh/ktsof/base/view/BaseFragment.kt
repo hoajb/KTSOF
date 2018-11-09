@@ -1,4 +1,4 @@
-package it.hoanguyenminh.ktsof.view
+package it.hoanguyenminh.ktsof.base.view
 
 import android.widget.Toast
 import io.reactivex.disposables.CompositeDisposable

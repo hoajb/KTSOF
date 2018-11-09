@@ -3,12 +3,10 @@ package it.hoanguyenminh.ktsof.di.modules
 import android.app.Application
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
-class AppModule(val app: Application) {
+class AppModule {
 
     @Provides
-    @Singleton
-    fun provideApplication(): Application = app
+    fun provideApplication(app: Application): Application = app
 }
