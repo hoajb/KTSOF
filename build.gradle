@@ -47,8 +47,9 @@ ext {
             lifecycle       : "1.1.1",
             paging          : "2.1.0-beta01",
             timber          : "4.7.1",
-            room          : "2.1.0-alpha02",
-            anko          : "0.10.5",
+            room            : "2.1.0-alpha02",
+            anko            : "0.10.5",
+            coroutines      : "1.0.0",
 
     ]
 

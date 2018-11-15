@@ -32,7 +32,7 @@ dependencies {
     implementation "com.jakewharton.timber:timber:${depVers.timber}"
 
     // support lib
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.1'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     // constraint layout
@@ -54,8 +54,8 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:${depVers.dagger2}"
 
     // coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.30.2-eap13'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.30.2-eap13'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${depVers.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${depVers.coroutines}"
 
     //networking
     implementation "com.squareup.okhttp3:logging-interceptor:${depVers.okhttp3}"

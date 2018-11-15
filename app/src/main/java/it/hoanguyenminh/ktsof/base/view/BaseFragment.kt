@@ -1,12 +1,35 @@
 package it.hoanguyenminh.ktsof.base.view
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
+import dagger.android.support.DaggerFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import it.hoanguyenminh.ktsof.custom.LoadingDialog
 import timber.log.Timber
 
-open class BaseFragment : androidx.fragment.app.Fragment() {
-    val subcriptions = CompositeDisposable()
+abstract class BaseFragment : DaggerFragment() {
+    private lateinit var dialog: LoadingDialog
+
+    abstract val layoutId: Int
+    abstract val mTAG: String?
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(layoutId, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        dialog = LoadingDialog(view.context)
+        dialog.setMessage("Loading")
+        dialog.setCancelable(false)
+    }
+
+    private val subcriptions = CompositeDisposable()
 
     fun subcribe(disposable: Disposable): Disposable {
         subcriptions.add(disposable)
@@ -26,23 +49,12 @@ open class BaseFragment : androidx.fragment.app.Fragment() {
     }
 
     fun showLoading(message: String) {
-//        val dialog = ProgressDialog(this.activity)
-//        dialog.setMessage("Please wait")
-//        dialog.setTitle("Loading")
-//        dialog.setCancelable(false)
-//        dialog.isIndeterminate = true
-//        dialog.show()
-
-//        alert {
-//            customView {
-//                editText()
-//            }
-//        }.show()
-//
-//        toast("Hi there!")
+        if (!dialog.isShowing)
+            dialog.show()
     }
 
     fun hideLoading() {
-
+        if (dialog.isShowing)
+            dialog.dismiss()
     }
 }

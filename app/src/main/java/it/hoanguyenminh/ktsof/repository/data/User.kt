@@ -28,4 +28,4 @@ data class User(
     val user_type: String,
     val website_url: String
 
-)
+) : Any()

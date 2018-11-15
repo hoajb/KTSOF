@@ -1,13 +1,21 @@
 package it.hoanguyenminh.ktsof.view.main
 
-import android.os.Bundle
-import dagger.android.DaggerActivity
-import it.hoanguyenminh.ktsof.R
+import android.app.Application
+import com.google.gson.Gson
+import it.hoanguyenminh.ktsof.base.view.BaseFragment
+import it.hoanguyenminh.ktsof.base.view.BaseSingleFragmentActivity
+import javax.inject.Inject
 
-class MainActivity : DaggerActivity() {
+class MainActivity : BaseSingleFragmentActivity() {
+    @Inject
+    lateinit var app: Application
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+    @Inject
+    lateinit var gson: Gson
+
+//    @Inject
+//    lateinit var usersFragment: UsersFragment
+
+    override fun createFragment(): BaseFragment = UsersFragment()
+
 }
