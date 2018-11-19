@@ -13,9 +13,16 @@ class LoadingDialog(context: Context) : Dialog(context) {
         setContentView(R.layout.dialog_loading)
     }
 
+    lateinit var messageShow: String
+
     fun setMessage(str: String): LoadingDialog {
-        message.text = str
+        messageShow = str
         return this
+    }
+
+    override fun show() {
+        message.text = messageShow
+        super.show()
     }
 
 }

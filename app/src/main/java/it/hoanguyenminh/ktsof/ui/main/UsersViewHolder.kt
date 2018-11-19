@@ -1,4 +1,4 @@
-package it.hoanguyenminh.ktsof.view.main
+package it.hoanguyenminh.ktsof.ui.main
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,7 +1,7 @@
 package it.hoanguyenminh.ktsof.base.view
 
 import android.os.Bundle
-import dagger.android.support.DaggerAppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import it.hoanguyenminh.ktsof.custom.LoadingDialog
 
 /**
@@ -9,7 +9,7 @@ import it.hoanguyenminh.ktsof.custom.LoadingDialog
  * hoa.nguyenminh.it@gmail.com
  */
 
-abstract class BaseActivity : DaggerAppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
     abstract val layoutId: Int
 
     private lateinit var loadingDialog: LoadingDialog
@@ -26,12 +26,14 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     }
 
     fun showLoading() {
-        if (!loadingDialog.isShowing)
-            loadingDialog.show()
+        if (!loadingDialog.isShowing) {
+        }
+        loadingDialog.show()
     }
 
     fun hideLoading() {
-        if (loadingDialog.isShowing)
-            loadingDialog.dismiss()
+        if (loadingDialog.isShowing) {
+        }
+        loadingDialog.dismiss()
     }
 }

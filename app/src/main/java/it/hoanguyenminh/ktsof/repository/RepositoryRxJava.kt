@@ -8,7 +8,7 @@ import it.hoanguyenminh.ktsof.repository.local.UserDao
 import it.hoanguyenminh.ktsof.repository.remote.SOFApi
 import timber.log.Timber
 
-class Repository(val sofApi: SOFApi, val userDao: UserDao) {
+class RepositoryRxJava(val sofApi: SOFApi, val userDao: UserDao) {
 
     fun getUsers(): Observable<List<User>> {
         return Observable.concatArray(

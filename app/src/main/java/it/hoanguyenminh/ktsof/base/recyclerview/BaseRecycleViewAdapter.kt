@@ -17,6 +17,9 @@ abstract class BaseRecycleViewAdapter<T : Any>(
         return mListData.size
     }
 
+    fun updateData(list: ArrayList<T>) {
+        mListData = list
+    }
 
 
     override fun onBindViewHolder(holder: BaseViewHolder<T>, position: Int) {

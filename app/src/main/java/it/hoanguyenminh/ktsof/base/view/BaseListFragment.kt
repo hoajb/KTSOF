@@ -23,9 +23,15 @@ abstract class BaseListFragment<T : Any> : BaseFragment() {
         LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
     open fun setUpRecyclerView(list: ArrayList<T>) {
-        adapter = createAdapter(list, getItemClickListener());
-        recyclerView.layoutManager = getLayoutManager()
-        recyclerView.adapter = adapter
+        if (!::adapter.isInitialized) {
+            adapter = createAdapter(list, getItemClickListener())
+            recyclerView.layoutManager = getLayoutManager()
+            recyclerView.adapter = adapter
+        } else {
+            adapter.updateData(list)
+            adapter.notifyDataSetChanged()
+        }
+
     }
 }
 

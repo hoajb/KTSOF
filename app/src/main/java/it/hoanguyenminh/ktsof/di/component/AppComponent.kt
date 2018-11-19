@@ -1,6 +1,5 @@
 package it.hoanguyenminh.ktsof.di.component
 
-import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -27,9 +26,9 @@ interface AppComponent : AndroidInjector<SOFApplication> {
     interface Builder {
 
         @BindsInstance
-        fun application(app: Application): AppComponent.Builder
+        fun application(app: SOFApplication): AppComponent.Builder
 
-        fun repositoryModule(module: RepositoryModule): AppComponent.Builder
+//        fun repositoryModule(module: RepositoryModule): AppComponent.Builder
 
         fun build(): AppComponent
     }
