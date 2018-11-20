@@ -1,6 +1,7 @@
 package it.hoanguyenminh.ktsof.ui.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import it.hoanguyenminh.ktsof.application.SOFApplication
@@ -28,6 +29,8 @@ class UsersFragment : BaseListFragment<User>() {
     @Inject
     lateinit var factory: UsersViewModelFactory
 
+    lateinit var usersViewModel: UsersViewModel
+
     override fun createAdapter(
         list: ArrayList<User>,
         clickListener: ItemClickListener<User>?
@@ -36,23 +39,19 @@ class UsersFragment : BaseListFragment<User>() {
     override val mTAG: String?
         get() = UsersFragment::class.java.simpleName
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        usersViewModel = ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
+    }
 
-        Timber.d("HOAA" + application.toString())
-        Timber.d("HOAA" + repositoryLiveData.toString())
-
-//        factory = UsersViewModelFactory(application, repositoryLiveData)
-
-        Timber.d("HOAA" + factory.toString())
-        var usersViewModel: UsersViewModel = ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         usersViewModel.getUsers(1)
         usersViewModel.data.observe(this,
             Observer<ArrayList<User>> { users ->
                 Timber.d(mTAG, "users: %s", users?.get(0))
-                showToast("users: " + users?.get(0))
+//                showToast("users: " + users?.get(0))
+                setUpRecyclerView(users)
             })
-
     }
-
 }

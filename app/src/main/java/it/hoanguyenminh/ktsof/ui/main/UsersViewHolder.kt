@@ -7,6 +7,7 @@ import it.hoanguyenminh.ktsof.R
 import it.hoanguyenminh.ktsof.base.recyclerview.BaseViewHolder
 import it.hoanguyenminh.ktsof.base.recyclerview.ItemClickListener
 import it.hoanguyenminh.ktsof.repository.data.User
+import kotlinx.android.synthetic.main.item_user.view.*
 
 /**
  * Created by Hoa Nguyen on 2018 November 12.
@@ -17,9 +18,9 @@ class UsersViewHolder(itemView: View, clickListener: ItemClickListener<User>? = 
     BaseViewHolder<User>(itemView, clickListener) {
 
     override fun bindingData(data: User) {
-        super.bindingData(data)
-
-
+        itemView.tvname.text = data.display_name
+        itemView.tvlink.text = data.link
+        showImage(itemView.imAvatar, data.profile_image)
     }
 
     //    @Inject

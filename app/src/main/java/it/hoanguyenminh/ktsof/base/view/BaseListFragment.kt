@@ -32,6 +32,8 @@ abstract class BaseListFragment<T : Any> : BaseFragment() {
             adapter.notifyDataSetChanged()
         }
 
+        if (list.isEmpty()) {
+        }
     }
 }
 
