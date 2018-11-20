@@ -6,11 +6,11 @@ import dagger.Module
 import dagger.Provides
 import it.hoanguyenminh.ktsof.repository.RepositoryLiveData
 import it.hoanguyenminh.ktsof.repository.config.Config
+import it.hoanguyenminh.ktsof.repository.local.UserDao
 import it.hoanguyenminh.ktsof.repository.remote.SOFApi
 import it.hoanguyenminh.ktsof.repository.remote.SOFApiCall
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -70,31 +70,28 @@ class RepositoryModule {
     @Provides
     fun provideRetrofitCall(
         client: OkHttpClient,
-        converter: GsonConverterFactory,
-        adapter: CallAdapter.Factory
+//        adapter: CallAdapter.Factory,
+        converter: GsonConverterFactory
     ): SOFApiCall {
         val buidler = Retrofit.Builder()
             .baseUrl(Config.BASE_URL)
             .client(client)
             .addConverterFactory(converter)
-            .addCallAdapterFactory(adapter)
+//            .addCallAdapterFactory(adapter)
             .build()
 
         return buidler.create(SOFApiCall::class.java)
     }
 
-//    @Provides
-//    fun providesUserDao(): UserDao {
-//
-//        return UserDao()
-//    }
+    @Provides
+    fun providesUserDao(): UserDao? {
+        return null
+    }
 
     @Provides
     fun provideRepositoryLiveData(
         sofApiCall: SOFApiCall
     ): RepositoryLiveData {
-
-
         return RepositoryLiveData(sofApiCall)
     }
 }

@@ -1,12 +1,15 @@
 package it.hoanguyenminh.ktsof.ui.main
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import it.hoanguyenminh.ktsof.application.SOFApplication
 import it.hoanguyenminh.ktsof.base.recyclerview.BaseRecycleViewAdapter
 import it.hoanguyenminh.ktsof.base.recyclerview.ItemClickListener
 import it.hoanguyenminh.ktsof.base.view.BaseListFragment
 import it.hoanguyenminh.ktsof.repository.RepositoryLiveData
 import it.hoanguyenminh.ktsof.repository.data.User
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -22,7 +25,8 @@ class UsersFragment : BaseListFragment<User>() {
     @Inject
     lateinit var repositoryLiveData: RepositoryLiveData
 
-    lateinit var factory: UsersViewModel.Factory
+    @Inject
+    lateinit var factory: UsersViewModelFactory
 
     override fun createAdapter(
         list: ArrayList<User>,
@@ -35,16 +39,20 @@ class UsersFragment : BaseListFragment<User>() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-//        Timber.d("Application" + application.toString())
-//        Timber.d("Application" + repositoryLiveData.toString())
+        Timber.d("HOAA" + application.toString())
+        Timber.d("HOAA" + repositoryLiveData.toString())
 
-//        factory = UsersViewModel.Factory(application, repositoryLiveData)
-//        var usersViewModel: UsersViewModel = ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
-//        usersViewModel.data.observe(this,
-//            Observer<ArrayList<User>> { users ->
-//                Timber.d(mTAG, "users: %s", users?.get(0))
-//                Toast.makeText(activity, "users: " + users?.get(0), Toast.LENGTH_LONG).show()
-//            })
+//        factory = UsersViewModelFactory(application, repositoryLiveData)
+
+        Timber.d("HOAA" + factory.toString())
+        var usersViewModel: UsersViewModel = ViewModelProviders.of(this, factory).get(UsersViewModel::class.java)
+        usersViewModel.getUsers(1)
+        usersViewModel.data.observe(this,
+            Observer<ArrayList<User>> { users ->
+                Timber.d(mTAG, "users: %s", users?.get(0))
+                showToast("users: " + users?.get(0))
+            })
+
     }
 
 }

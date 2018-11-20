@@ -5,13 +5,14 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import it.hoanguyenminh.ktsof.application.SOFApplication
+import it.hoanguyenminh.ktsof.di.modules.AppModule
 import it.hoanguyenminh.ktsof.di.modules.BuildersModule
 import it.hoanguyenminh.ktsof.di.modules.RepositoryModule
 
 @Component(
     modules = [
         AndroidSupportInjectionModule::class,
-//        AppModule::class,
+        AppModule::class,
         BuildersModule::class,
         RepositoryModule::class
     ]

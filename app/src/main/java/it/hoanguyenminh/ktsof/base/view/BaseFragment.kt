@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import dagger.android.support.DaggerFragment
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import it.hoanguyenminh.ktsof.custom.LoadingDialog
 import timber.log.Timber
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : DaggerFragment() {
     private lateinit var dialog: LoadingDialog
 
     abstract val layoutId: Int
@@ -56,5 +56,9 @@ abstract class BaseFragment : Fragment() {
     fun hideLoading() {
         if (dialog.isShowing)
             dialog.dismiss()
+    }
+
+    fun showToast(mess: String) {
+        Toast.makeText(context, mess, Toast.LENGTH_SHORT).show()
     }
 }

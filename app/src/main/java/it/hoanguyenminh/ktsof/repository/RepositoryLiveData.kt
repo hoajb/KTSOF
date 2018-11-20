@@ -4,14 +4,19 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import it.hoanguyenminh.ktsof.repository.config.Config
 import it.hoanguyenminh.ktsof.repository.data.User
+import it.hoanguyenminh.ktsof.repository.data.Users
 import it.hoanguyenminh.ktsof.repository.local.UserDao
 import it.hoanguyenminh.ktsof.repository.remote.SOFApiCall
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
+import javax.inject.Inject
 
-class RepositoryLiveData(val sofApi: SOFApiCall, val userDao: UserDao? = null) {
+class RepositoryLiveData @Inject constructor(val sofApi: SOFApiCall) {
+    val userDao: UserDao? = null
+
+    val livedata: MutableLiveData<ArrayList<User>> = MutableLiveData()
 
 //    fun getUsers(): Observable<List<User>> {
 //        return Observable.concatArray(
@@ -36,23 +41,20 @@ class RepositoryLiveData(val sofApi: SOFApiCall, val userDao: UserDao? = null) {
 //                storeUsersInDb(it)
 //            }
 
-        val livedata: MutableLiveData<ArrayList<User>> = MutableLiveData()
-
         sofApi.getUsers(Config.SITE, Config.PAGE_SIZE, page)
-            .enqueue(object : Callback<ArrayList<User>> {
-                override fun onFailure(call: Call<ArrayList<User>>, t: Throwable) {
+            .enqueue(object : Callback<Users> {
+                override fun onFailure(call: Call<Users>, t: Throwable) {
                     livedata.postValue(null)
                 }
 
-                override fun onResponse(call: Call<ArrayList<User>>, response: Response<ArrayList<User>>) {
+                override fun onResponse(call: Call<Users>, response: Response<Users>) {
                     if (response.isSuccessful) {
                         val users = response.body()
-                        storeUsersInDb(users)
-                        livedata.postValue(users)
+                        storeUsersInDb(users?.items)
+                        livedata.postValue(users?.items)
                     } else {
                         livedata.postValue(null)
                     }
-
                 }
             })
 
