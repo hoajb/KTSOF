@@ -63,7 +63,7 @@ class UsersPagedFragment : BasePagedListFragment<User, UsersViewHolder>() {
             adapter.setNetworkState(it)
         })
 
-        usersViewModel.getUsersPaged(1)
+//        usersViewModel.getUsersPaged(1)
     }
 
     private fun initSwipeToRefresh() {

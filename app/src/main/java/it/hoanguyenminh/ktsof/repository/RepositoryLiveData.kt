@@ -80,12 +80,13 @@ class RepositoryLiveData @Inject constructor(val sofApi: SOFApiCall) {
     }
 
     @MainThread
-    fun getUsersPagedFromAPI(page: Int): MutableLiveData<Listing<User>> {
+    fun getUsersPagedFromAPI(): MutableLiveData<Listing<User>> {
         val sourceFactory = UsersDataSourceFactory(sofApi)
 
         // We use toLiveData Kotlin extension function here, you could also use LivePagedListBuilder
         val livePagedList = sourceFactory.toLiveData(
-            pageSize = Config.PAGE_SIZE
+            pageSize = Config.PAGE_SIZE,
+            initialLoadKey = 1
 //            ,
 //            // provide custom executor for network requests, otherwise it will default to
 //            // Arch Components' IO pool which is also used for disk access

@@ -6,5 +6,4 @@ class Config() {
         var PAGE_SIZE: Int = 30
         var BASE_URL = "https://api.stackexchange.com/2.2/"
     }
-
 }

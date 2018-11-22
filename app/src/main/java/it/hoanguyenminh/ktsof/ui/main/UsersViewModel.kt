@@ -1,8 +1,11 @@
 package it.hoanguyenminh.ktsof.ui.main
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations.switchMap
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import it.hoanguyenminh.ktsof.application.SOFApplication
 import it.hoanguyenminh.ktsof.repository.Listing
 import it.hoanguyenminh.ktsof.repository.RepositoryLiveData
@@ -25,9 +28,9 @@ open class UsersViewModel(application: Application, private val repository: Repo
 
     lateinit var data: LiveData<List<User>>
 
-    private var currentPage: MutableLiveData<Int> = MutableLiveData()
+//    private var currentPage: MutableLiveData<Int> = MutableLiveData()
 
-    private var repoResult: LiveData<Listing<User>> = repository.getUsersPagedFromAPI(currentPage.value ?: 1)
+    private var repoResult: LiveData<Listing<User>> = repository.getUsersPagedFromAPI()
 
     val users = switchMap(repoResult) { it.pagedList }!!
     val networkState = switchMap(repoResult) { it.networkState }!!
@@ -46,14 +49,14 @@ open class UsersViewModel(application: Application, private val repository: Repo
         listing?.retry?.invoke()
     }
 
-    fun getUsersPaged(page: Int): Boolean {
-        if (currentPage.value == page) {
-            return false
-        }
-
-        currentPage.value = page
-        return true
-    }
+//    fun getUsersPaged(page: Int): Boolean {
+//        if (currentPage.value == page) {
+//            return false
+//        }
+//
+//        currentPage.value = page
+//        return true
+//    }
 }
 
 
