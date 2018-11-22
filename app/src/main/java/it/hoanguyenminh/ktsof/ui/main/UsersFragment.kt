@@ -32,7 +32,7 @@ class UsersFragment : BaseListFragment<User>() {
     lateinit var usersViewModel: UsersViewModel
 
     override fun createAdapter(
-        list: ArrayList<User>,
+        list: List<User>,
         clickListener: ItemClickListener<User>?
     ): BaseRecycleViewAdapter<User> = UsersAdapter(mListData = list, clickListener = clickListener)
 
@@ -48,7 +48,7 @@ class UsersFragment : BaseListFragment<User>() {
         super.onViewCreated(view, savedInstanceState)
         usersViewModel.getUsers(1)
         usersViewModel.data.observe(this,
-            Observer<ArrayList<User>> { users ->
+            Observer<List<User>> { users ->
                 Timber.d(mTAG, "users: %s", users?.get(0))
 //                showToast("users: " + users?.get(0))
                 setUpRecyclerView(users)

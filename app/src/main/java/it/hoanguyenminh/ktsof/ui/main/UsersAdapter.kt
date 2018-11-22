@@ -11,7 +11,7 @@ import it.hoanguyenminh.ktsof.repository.data.User
  * hoa.nguyenminh.it@gmail.com
  */
 
-class UsersAdapter(mListData: ArrayList<User>, private val clickListener: ItemClickListener<User>?) :
+class UsersAdapter(mListData: List<User>, private val clickListener: ItemClickListener<User>?) :
     BaseRecycleViewAdapter<User>(mListData, clickListener) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<User> {

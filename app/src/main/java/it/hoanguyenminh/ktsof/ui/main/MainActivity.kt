@@ -12,7 +12,8 @@ class MainActivity : BaseSingleFragmentActivity() {
     @Inject
     lateinit var application: SOFApplication
 
-    override fun createFragment(): BaseFragment = UsersFragment()
+    //    override fun createFragment(): BaseFragment = UsersFragment()
+    override fun createFragment(): BaseFragment = UsersPagedFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

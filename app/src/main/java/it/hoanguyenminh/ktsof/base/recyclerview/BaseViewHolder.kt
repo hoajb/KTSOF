@@ -18,7 +18,7 @@ abstract class BaseViewHolder<T : Any>(itemView: View, itemClickListener: ItemCl
 
     private lateinit var mData: T
 
-    abstract fun bindingData(data: T)
+    abstract fun bindingData(data: T?)
 
     fun setData(data: T) {
         mData = data

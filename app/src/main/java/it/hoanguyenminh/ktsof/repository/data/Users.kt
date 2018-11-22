@@ -9,5 +9,5 @@ import com.google.gson.annotations.SerializedName
 
 data class Users(
     @SerializedName("items")
-    var items: ArrayList<User>
+    var items: List<User>?
 )

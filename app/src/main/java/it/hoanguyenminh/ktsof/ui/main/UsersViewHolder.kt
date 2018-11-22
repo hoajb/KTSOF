@@ -17,16 +17,12 @@ import kotlinx.android.synthetic.main.item_user.view.*
 class UsersViewHolder(itemView: View, clickListener: ItemClickListener<User>? = null) :
     BaseViewHolder<User>(itemView, clickListener) {
 
-    override fun bindingData(data: User) {
-        itemView.tvname.text = data.display_name
-        itemView.tvlink.text = data.link
-        showImage(itemView.imAvatar, data.profile_image)
-    }
 
-    //    @Inject
-//    lateinit var usersFragment: UsersFragment
-//    @Inject
-//    lateinit var mainActivity: MainActivity
+    override fun bindingData(data: User?) {
+        itemView.tvname.text = data?.display_name
+        itemView.tvlink.text = data?.link
+        showImage(itemView.imAvatar, data?.profile_image ?: "")
+    }
 
     companion object {
         fun createInstance(parent: ViewGroup, viewType: Int = 0): UsersViewHolder {

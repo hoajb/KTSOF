@@ -12,7 +12,7 @@ abstract class BaseListFragment<T : Any> : BaseFragment() {
         get() = R.layout.base_fragment_single_list
 
     abstract fun createAdapter(
-        list: ArrayList<T>,
+        list: List<T>,
         clickListener: ItemClickListener<T>? = null
     ): BaseRecycleViewAdapter<T>
 
@@ -22,7 +22,7 @@ abstract class BaseListFragment<T : Any> : BaseFragment() {
     open fun getLayoutManager(): RecyclerView.LayoutManager =
         LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-    open fun setUpRecyclerView(list: ArrayList<T>) {
+    open fun setUpRecyclerView(list: List<T>) {
         if (!::adapter.isInitialized) {
             adapter = createAdapter(list, getItemClickListener())
             recyclerView.layoutManager = getLayoutManager()
