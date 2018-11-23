@@ -16,21 +16,24 @@ abstract class BaseViewHolder<T : Any>(itemView: View, itemClickListener: ItemCl
 
     var clickListener: ItemClickListener<T>? = itemClickListener
 
-    private lateinit var mData: T
+    private var mData: T? = null
 
     abstract fun bindingData(data: T?)
 
-    fun setData(data: T) {
+    private val defaultClickListener: View.OnClickListener =
+        View.OnClickListener { clickListener?.onItemClick(mData, adapterPosition, 0) }
+
+    fun setData(data: T?) {
         mData = data
     }
 
     init {
-        itemView.setOnClickListener { getDefaultClickListener() }
+        itemView.setOnClickListener { defaultClickListener }
     }
 
-    open fun getDefaultClickListener(): View.OnClickListener {
-        return View.OnClickListener { clickListener?.onItemClick(mData, adapterPosition, 0) }
-    }
+//    open fun getDefaultClickListener(): View.OnClickListener {
+//        return View.OnClickListener { clickListener?.onItemClick(mData, adapterPosition, 0) }
+//    }
 
     fun showImage(imageView: ImageView, url: String) {
         GlideApp.with(itemView.context)
@@ -42,6 +45,6 @@ abstract class BaseViewHolder<T : Any>(itemView: View, itemClickListener: ItemCl
 }
 
 interface ItemClickListener<T> {
-    fun onItemClick(data: T, position: Int, typeClick: Int = 0)
+    fun onItemClick(data: T?, position: Int, typeClick: Int = 0)
 }
 

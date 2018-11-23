@@ -3,6 +3,7 @@ package it.hoanguyenminh.ktsof.repository.paging
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import it.hoanguyenminh.ktsof.repository.NetworkState
+import it.hoanguyenminh.ktsof.repository.config.Config
 import it.hoanguyenminh.ktsof.repository.data.User
 import it.hoanguyenminh.ktsof.repository.data.Users
 import it.hoanguyenminh.ktsof.repository.remote.SOFApiCall
@@ -43,8 +44,9 @@ class UsersDataSource(private val sofApi: SOFApiCall) : PageKeyedDataSource<Int,
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, User>) {
         val initPage = 1
         val request = sofApi.getUsers(
-            site = it.hoanguyenminh.ktsof.repository.config.Config.SITE,
-            pagesize = params.requestedLoadSize,
+            site = Config.SITE,
+//            pagesize = params.requestedLoadSize,
+            pagesize = Config.PAGE_SIZE,
             page = initPage
         )
 

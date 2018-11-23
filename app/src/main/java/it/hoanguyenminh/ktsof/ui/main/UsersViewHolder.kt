@@ -19,6 +19,7 @@ class UsersViewHolder(itemView: View, clickListener: ItemClickListener<User>? = 
 
 
     override fun bindingData(data: User?) {
+        itemView.tvNo.text = adapterPosition.toString()
         itemView.tvname.text = data?.display_name
         itemView.tvlink.text = data?.link
         showImage(itemView.imAvatar, data?.profile_image ?: "")

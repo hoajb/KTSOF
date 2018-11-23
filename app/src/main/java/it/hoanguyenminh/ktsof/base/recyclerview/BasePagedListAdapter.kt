@@ -34,6 +34,8 @@ abstract class BasePagedListAdapter<T : Any, VH : BaseViewHolder<T>>(
 
 
     override fun onBindViewHolder(holder: VH, position: Int) {
+        holder.clickListener = clickListener
+        holder.setData(getItem(position))
         when (getItemViewType(position)) {
             TYPE_ITEM -> holder.bindingData(getItem(position))
             TYPE_NETWORK_STATE -> (holder as NetworkStateItemViewHolder).bindingData(networkState)

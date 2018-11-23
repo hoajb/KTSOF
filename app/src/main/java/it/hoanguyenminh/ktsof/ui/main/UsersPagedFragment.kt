@@ -24,8 +24,8 @@ class UsersPagedFragment : BasePagedListFragment<User, UsersViewHolder>() {
         UsersPagedAdapter(
             retryCallback = { usersViewModel.retry() },
             clickListener = object : ItemClickListener<User> {
-                override fun onItemClick(data: User, position: Int, typeClick: Int) {
-                    showToast(data.display_name)
+                override fun onItemClick(data: User?, position: Int, typeClick: Int) {
+                    data?.display_name?.let { showToast(it) }
                 }
             })
 

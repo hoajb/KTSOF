@@ -13,6 +13,7 @@ import it.hoanguyenminh.ktsof.repository.data.User
 
 class UsersPagedAdapter(private val retryCallback: () -> Unit, private val clickListener: ItemClickListener<User>?) :
     BasePagedListAdapter<User, UsersViewHolder>(diffCallback, retryCallback, clickListener) {
+
     override fun createItemViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolder =
         UsersViewHolder.createInstance(parent, viewType)
 
