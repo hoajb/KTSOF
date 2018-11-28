@@ -1,10 +1,11 @@
-package it.hoanguyenminh.ktsof.ui.main
+package it.hoanguyenminh.ktsof.ui.paged
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import it.hoanguyenminh.ktsof.base.recyclerview.BasePagedListAdapter
 import it.hoanguyenminh.ktsof.base.recyclerview.ItemClickListener
 import it.hoanguyenminh.ktsof.repository.data.User
+import it.hoanguyenminh.ktsof.ui.main.UsersViewHolder
 
 /**
  * Created by Hoa Nguyen on 2018 November 13.

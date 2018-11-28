@@ -1,4 +1,4 @@
-package it.hoanguyenminh.ktsof.ui.main
+package it.hoanguyenminh.ktsof.ui.paged
 
 import android.os.Bundle
 import android.view.View
@@ -11,6 +11,9 @@ import it.hoanguyenminh.ktsof.base.recyclerview.ItemClickListener
 import it.hoanguyenminh.ktsof.base.view.BasePagedListFragment
 import it.hoanguyenminh.ktsof.repository.NetworkState.Companion.LOADING
 import it.hoanguyenminh.ktsof.repository.data.User
+import it.hoanguyenminh.ktsof.ui.main.UsersViewHolder
+import it.hoanguyenminh.ktsof.ui.main.UsersViewModel
+import it.hoanguyenminh.ktsof.ui.main.UsersViewModelFactory
 import kotlinx.android.synthetic.main.base_fragment_single_list.*
 import javax.inject.Inject
 

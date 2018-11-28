@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import it.hoanguyenminh.ktsof.ui.main.MainActivity
 import it.hoanguyenminh.ktsof.ui.main.UsersFragment
-import it.hoanguyenminh.ktsof.ui.main.UsersPagedFragment
+import it.hoanguyenminh.ktsof.ui.paged.UsersPagedFragment
 
 @Module
 abstract class BuildersModule {
