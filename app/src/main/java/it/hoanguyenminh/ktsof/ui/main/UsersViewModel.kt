@@ -1,14 +1,12 @@
 package it.hoanguyenminh.ktsof.ui.main
 
 import android.app.Application
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.*
 import androidx.lifecycle.Transformations.switchMap
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import io.reactivex.disposables.CompositeDisposable
 import it.hoanguyenminh.ktsof.application.SOFApplication
 import it.hoanguyenminh.ktsof.repository.Listing
-import it.hoanguyenminh.ktsof.repository.RepositoryLiveData
+import it.hoanguyenminh.ktsof.repository.RepositoryRxJava
 import it.hoanguyenminh.ktsof.repository.data.User
 import it.hoanguyenminh.ktsof.viewmodel.BaseViewModel
 import javax.inject.Inject
@@ -18,7 +16,7 @@ import javax.inject.Inject
  * hoa.nguyenminh.it@gmail.com
  */
 
-open class UsersViewModel(application: Application, private val repository: RepositoryLiveData) :
+open class UsersViewModel(application: Application, private val repository: RepositoryRxJava) :
     BaseViewModel(application), LifecycleObserver {
 
 //    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -27,17 +25,20 @@ open class UsersViewModel(application: Application, private val repository: Repo
 //    }
 
     lateinit var data: LiveData<List<User>>
+    val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    val repoResult: MutableLiveData<Listing<User>> = MutableLiveData()
 
-//    private var currentPage: MutableLiveData<Int> = MutableLiveData()
-
-    private var repoResult: LiveData<Listing<User>> = repository.getUsersPagedFromAPI()
 
     val users = switchMap(repoResult) { it.pagedList }!!
     val networkState = switchMap(repoResult) { it.networkState }!!
     val refreshState = switchMap(repoResult) { it.refreshState }!!
 
-    fun getUsers(page: Int) {
-        data = repository.getUsersFromApi(page)
+//    fun getUsers(page: Int) {
+////        data = repository.getUsersFromApi(page)
+////    }
+
+    fun loadUsers() {
+        repository.getUsersPagedFromAPI(compositeDisposable, repoResult)
     }
 
     fun refresh() {
@@ -57,12 +58,17 @@ open class UsersViewModel(application: Application, private val repository: Repo
 //        currentPage.value = page
 //        return true
 //    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
+    }
 }
 
 
 class UsersViewModelFactory @Inject constructor(
     private val application: SOFApplication,
-    private val repository: RepositoryLiveData
+    private val repository: RepositoryRxJava
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")

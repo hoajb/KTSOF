@@ -5,13 +5,16 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import it.hoanguyenminh.ktsof.repository.RepositoryLiveData
+import it.hoanguyenminh.ktsof.repository.RepositoryRxJava
 import it.hoanguyenminh.ktsof.repository.config.Config
 import it.hoanguyenminh.ktsof.repository.local.UserDao
 import it.hoanguyenminh.ktsof.repository.remote.SOFApi
 import it.hoanguyenminh.ktsof.repository.remote.SOFApiCall
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.CallAdapter
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
@@ -34,10 +37,10 @@ class RepositoryModule {
         return GsonConverterFactory.create(gson)
     }
 
-//    @Provides
-//    fun provideCallAdapter(): CallAdapter.Factory {
-//        return CallAdapter()
-//    }
+    @Provides
+    fun provideCallAdapter(): CallAdapter.Factory {
+        return RxJava2CallAdapterFactory.create()
+    }
 
     @Provides
     fun provideClient(): OkHttpClient {
@@ -53,15 +56,14 @@ class RepositoryModule {
     @Provides
     fun provideRetrofit(
         client: OkHttpClient,
-        converter: GsonConverterFactory
-//        ,
-//        adapter: CallAdapter.Factory
+        converter: GsonConverterFactory,
+        adapter: CallAdapter.Factory
     ): SOFApi {
         val buidler = Retrofit.Builder()
             .baseUrl(Config.BASE_URL)
             .client(client)
             .addConverterFactory(converter)
-//            .addCallAdapterFactory(adapter)
+            .addCallAdapterFactory(adapter)
             .build()
 
         return buidler.create(SOFApi::class.java)
@@ -93,5 +95,13 @@ class RepositoryModule {
         sofApiCall: SOFApiCall
     ): RepositoryLiveData {
         return RepositoryLiveData(sofApiCall)
+    }
+
+    @Provides
+    fun provideRepositoryRxJava(
+        sofApi: SOFApi
+//        , userDao: UserDao
+    ): RepositoryRxJava {
+        return RepositoryRxJava(sofApi/*, userDao*/)
     }
 }

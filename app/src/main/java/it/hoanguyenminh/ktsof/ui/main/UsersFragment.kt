@@ -24,9 +24,6 @@ class UsersFragment : BaseListFragment<User>() {
     lateinit var application: SOFApplication
 
     @Inject
-    lateinit var repositoryLiveData: RepositoryLiveData
-
-    @Inject
     lateinit var factory: UsersViewModelFactory
 
     lateinit var usersViewModel: UsersViewModel
@@ -46,7 +43,7 @@ class UsersFragment : BaseListFragment<User>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        usersViewModel.getUsers(1)
+//        usersViewModel.getUsers(1)
         usersViewModel.data.observe(this,
             Observer<List<User>> { users ->
                 Timber.d(mTAG, "users: %s", users?.get(0))

@@ -10,6 +10,7 @@ import it.hoanguyenminh.ktsof.base.recyclerview.BasePagedListAdapter
 import it.hoanguyenminh.ktsof.base.recyclerview.ItemClickListener
 import it.hoanguyenminh.ktsof.base.view.BasePagedListFragment
 import it.hoanguyenminh.ktsof.repository.NetworkState.Companion.LOADING
+import it.hoanguyenminh.ktsof.repository.RepositoryLiveData
 import it.hoanguyenminh.ktsof.repository.data.User
 import it.hoanguyenminh.ktsof.ui.main.UsersViewHolder
 import it.hoanguyenminh.ktsof.ui.main.UsersViewModel
@@ -35,8 +36,8 @@ class UsersPagedFragment : BasePagedListFragment<User, UsersViewHolder>() {
     @Inject
     lateinit var application: SOFApplication
 
-//    @Inject
-//    lateinit var repositoryLiveData: RepositoryLiveData
+    @Inject
+    lateinit var repositoryLiveData: RepositoryLiveData
 
     @Inject
     lateinit var factory: UsersViewModelFactory
@@ -58,7 +59,12 @@ class UsersPagedFragment : BasePagedListFragment<User, UsersViewHolder>() {
 
         usersViewModel.users.observe(this,
             Observer<PagedList<User>> { listing ->
-                //                showToast("users: " + users?.get(0))
+                if (listing != null && !listing.isEmpty()) {
+                    showToast("users: " + listing.get(0))
+                } else {
+                    showToast("users: empty")
+                }
+
                 adapter.submitList(listing)
             })
 
@@ -66,7 +72,7 @@ class UsersPagedFragment : BasePagedListFragment<User, UsersViewHolder>() {
             adapter.setNetworkState(it)
         })
 
-//        usersViewModel.getUsersPaged(1)
+        usersViewModel.loadUsers()
     }
 
     private fun initSwipeToRefresh() {

@@ -43,7 +43,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     // constraint layout
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
 
     implementation "com.github.bumptech.glide:glide:${depVers.glide}"
     kapt "com.github.bumptech.glide:compiler:${depVers.glide}"
@@ -71,6 +71,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:${depVers.okhttp3}"
     implementation "com.squareup.retrofit2:converter-gson:${depVers.retrofit}"
     implementation "com.squareup.retrofit2:retrofit:${depVers.retrofit}"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${depVers.retrofit}"
     implementation "io.reactivex.rxjava2:rxandroid:${depVers.rxandroid2}"
 
     //paging
@@ -88,6 +89,6 @@ dependencies {
 
     // test
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
